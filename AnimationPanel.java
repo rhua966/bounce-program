@@ -72,8 +72,13 @@ public class AnimationPanel extends JComponent implements Runnable {
         int marginHeight = getHeight() - insets.top - insets.bottom;
         // create a new shape dependent on all current properties and the mouse position
         switch (currentShapeType) {
-            case 0: {
-                shapes[count] = new MovingOval(x, y, currentWidth,	currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+            case 0: { // Oval
+                shapes[count] = new MovingOval(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+                count++;
+                break;
+            }
+            case 1: { // Rectangle
+                shapes[count] = new MovingRectangle(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
                 count++;
                 break;
             }
