@@ -2,8 +2,8 @@
  *  ============================================================================================
  *  A1.java : Extends JFrame and contains a panel where shapes move around on the screen.
  *  Also contains start and stop buttons that starts animation and stops animation respectively.
- *  YOUR UPI: ANSWER
- *  YOUR Name:
+ *  YOUR UPI: rhua966
+ *  YOUR Name: Rui Huang
  *  ============================================================================================
  */
 

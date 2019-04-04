@@ -2,8 +2,8 @@
  *  ===============================================================================
  *  MovingCircle.java : A shape that is an oval.
  *  An oval/circle has 4 handles shown when it is selected (by clicking on it).
- *  UPI:
- *  Name:
+ *  UPI: rhua966
+ *  Name: Rui Huang
  *  ===============================================================================
  */
 import java.awt.*;

@@ -3,8 +3,8 @@
  *    AnimationPanel.java : Moves shapes around on the screen according to different paths.
  *    It is the main drawing area where shapes are added and manipulated.
  *    It also contains a popup menu to clear all shapes.
- *    UPI:
- *    Name:
+ *    UPI: rhua966
+ *    Name: Rui Huang
  *    ==========================================================================================
  */
 

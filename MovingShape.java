@@ -3,6 +3,8 @@
  *    MovingShape.java : The superclass of all shapes.
  *    A shape has a point (top-left corner).
  *    A shape defines various properties, including selected, colour, width and height.
+ *    UPI: rhua966
+ *    Name: Rui Huang
  *    ===============================================================================
  */
 
