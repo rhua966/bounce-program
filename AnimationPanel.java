@@ -82,8 +82,13 @@ public class AnimationPanel extends JComponent implements Runnable {
                 count++;
                 break;
             }
-            case 2: {
-                shapes[count] = new MovingSquare(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+            case 2: { // Square
+                shapes[count] = new MovingSquare(x, y, (currentWidth >= currentHeight) ? currentHeight : currentWidth, (currentWidth >= currentHeight) ? currentHeight : currentWidth, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+                count++;
+                break;
+            }
+            case 4: { // Quad Pie
+                shapes[count] = new MovingQuadPie(x, y, (currentWidth >= currentHeight) ? currentHeight : currentWidth,(currentWidth >= currentHeight) ? currentHeight : currentWidth, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
                 count++;
                 break;
             }

@@ -1,7 +1,7 @@
 /*
  *  ===============================================================================
- *  MovingRectangle.java : A shape that is an rectangle.
- *  An rectangle has 4 handles shown when it is selected (by clicking on it).
+ *  MovingSquare.java : A shape that is an square.
+ *  An square has 4 handles shown when it is selected (by clicking on it).
  *  UPI: rhua966
  *  Name: Rui Huang
  *  ===============================================================================
@@ -25,7 +25,7 @@ public class MovingSquare extends MovingShape {
         super(x, y, (w > h) ? h : w, (w > h) ? h : w, mw, mh, bc, fc, pathType);
     }
 
-    /** draw the oval with the fill colour
+    /** draw the square with the fill colour
      *  If it is selected, draw the handles
      *  @param g	the Graphics control
      */

@@ -25,7 +25,7 @@ public class MovingRectangle extends MovingShape {
         super(x, y, w, h, mw, mh, bc, fc, pathType);
     }
 
-    /** draw the oval with the fill colour
+    /** draw the rectangle with the fill colour
      *  If it is selected, draw the handles
      *  @param g	the Graphics control
      */
