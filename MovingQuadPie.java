@@ -36,6 +36,9 @@ public class MovingQuadPie extends MovingShape {
         g.setColor(fillColor);
         g.fillArc(topLeft.x, topLeft.y, width, height, 0, 90);
         g.fillArc(topLeft.x, topLeft.y, width, height, 180, 90);
+        g.setColor(Color.white);
+        g.fillArc(topLeft.x, topLeft.y, width, height, 90, 90);
+        g.fillArc(topLeft.x, topLeft.y, width, height, 270, 90);
         drawHandles(g);
     }
     public boolean contains(Point mousePt) {
