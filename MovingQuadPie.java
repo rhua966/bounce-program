@@ -9,20 +9,20 @@
 
 import java.awt.*;
 
-public class MovingQuadPie extends MovingShape {
+public class MovingQuadPie extends MovingSquare {
 
     /**
      * Constructor to create a quad pie with default parameters.
      */
     public MovingQuadPie() {
-        this(0, 0, 50, 50, defaultMarginWidth, defaultMarginHeight, defaultBorderColor, defaultFillColor, defaultPath);
+        super();
     }
 
     /**
-     * Constructor to create a square shape.
+     * Constructor to create a quad pie shape.
      */
     public MovingQuadPie(int x, int y, int w, int h, int mw, int mh, Color bc, Color fc, int pathType) {
-        super(x, y, (w >= h) ? h : w, (w >= h) ? h : w, mw, mh, bc, fc, pathType);
+        super(x, y, w, h, mw, mh, bc, fc, pathType);
     }
 
     /** draw the quad pie with the fill colour
@@ -31,14 +31,17 @@ public class MovingQuadPie extends MovingShape {
      */
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        int d = width / 10;
         g.setColor(borderColor);
-        g.drawOval(topLeft.x, topLeft.y, width, height);
-        g.setColor(fillColor);
-        g.fillArc(topLeft.x, topLeft.y, width, height, 0, 90);
-        g.fillArc(topLeft.x, topLeft.y, width, height, 180, 90);
+        g.fillOval(topLeft.x, topLeft.y, width, height);
         g.setColor(Color.white);
-        g.fillArc(topLeft.x, topLeft.y, width, height, 90, 90);
-        g.fillArc(topLeft.x, topLeft.y, width, height, 270, 90);
+        g.fillOval(topLeft.x + d, topLeft.y + d, width - 2 * d, height - 2 * d);
+        g.setColor(fillColor);
+        g.fillArc(topLeft.x + d, topLeft.y + d, width - 2 * d, height - 2 * d, 0, 90);
+        g.fillArc(topLeft.x + d, topLeft.y + d, width - 2 * d, height - 2 * d, 180, 90);
+//        g.setColor(Color.white);
+//        g.fillArc(topLeft.x, topLeft.y, width, height, 90, 90);
+//        g.fillArc(topLeft.x, topLeft.y, width, height, 270, 90);
         drawHandles(g);
     }
     public boolean contains(Point mousePt) {

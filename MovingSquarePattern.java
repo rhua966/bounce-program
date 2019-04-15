@@ -9,32 +9,30 @@
 
 import java.awt.*;
 
-public class MovingSquarePattern extends MovingShape {
+public class MovingSquarePattern extends MovingSquare {
 
     /**
      * Constructor to create a square pattern with default parameters.
      */
     public MovingSquarePattern() {
-        this(0, 0, 50, 50, defaultMarginWidth, defaultMarginHeight, defaultBorderColor, defaultFillColor, defaultPath);
+        super();
     }
 
     /**
      * Constructor to create a square pattern shape.
      */
     public MovingSquarePattern(int x, int y, int w, int h, int mw, int mh, Color bc, Color fc, int pathType) {
-        super(x, y, (w > h) ? h : w, (w > h) ? h : w, mw, mh, bc, fc, pathType);
+        super(x, y, w, h, mw, mh, bc, fc, pathType);
     }
-
-    /** draw the square pattern with the fill colour
-     *  If it is selected, draw the handles
-     *  @param g	the Graphics control
-     */
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        int d = width / 10;
         g.setColor(fillColor);
-    }
-    public boolean contains(Point mousePt) {
-        Point endPt = new Point(topLeft.x + width, topLeft.y + height);
-        return (topLeft.x <= mousePt.x && mousePt.x <= endPt.x) && (topLeft.y <= mousePt.y && mousePt.y <= endPt.y);
+        g.drawRect(topLeft.x, topLeft.y, width, height);
+        for(int i = 0; i < 10; i++) {
+            g.drawLine(topLeft.x, topLeft.y + i * d, topLeft.x + i * d, topLeft.y + height);
+            g.drawLine(topLeft.x + i * d, topLeft.y, topLeft.x + width, topLeft.y + i * d);
+        }
+        drawHandles(g);
     }
 }

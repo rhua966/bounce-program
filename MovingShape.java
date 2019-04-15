@@ -140,10 +140,14 @@ public abstract class MovingShape {
                 path = new FallingPath();
                 break;
             }
-             case 1 : {
+            case 1 : {
                 path = new BouncingPath(5, 10);
                 break;
-            }       }
+            }
+            case 2 : {
+                path = new StraightLinePath((int) (Math.random() * 15));
+            }
+        }
     }
 
     /** move the shape by the path
@@ -237,5 +241,21 @@ public abstract class MovingShape {
                  topLeft.y = marginHeight - height;
              }
         }
+    }
+    /*
+     *  ===============================================================================
+     *  BouncingPath : A Bouncing path.
+     *  ===============================================================================
+     */
+    public class StraightLinePath extends MovingPath {
+        public StraightLinePath(int speed) {
+            deltaX = speed;
+        }
+        public void move() {
+            topLeft.x = topLeft.x + deltaX;
+
+            if (topLeft.x > marginWidth) topLeft.x = 0;
+        }
+
     }
 }

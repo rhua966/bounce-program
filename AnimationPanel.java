@@ -83,12 +83,20 @@ public class AnimationPanel extends JComponent implements Runnable {
                 break;
             }
             case 2: { // Square
-                shapes[count] = new MovingSquare(x, y, (currentWidth >= currentHeight) ? currentHeight : currentWidth, (currentWidth >= currentHeight) ? currentHeight : currentWidth, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+                int min = Math.min(currentWidth, currentHeight);
+                shapes[count] = new MovingSquare(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+                count++;
+                break;
+            }
+            case 3: { // Square pattern
+                int min = Math.min(currentWidth, currentHeight);
+                shapes[count] = new MovingSquarePattern(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
                 count++;
                 break;
             }
             case 4: { // Quad Pie
-                shapes[count] = new MovingQuadPie(x, y, (currentWidth >= currentHeight) ? currentHeight : currentWidth,(currentWidth >= currentHeight) ? currentHeight : currentWidth, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
+                int min = Math.min(currentWidth, currentHeight);
+                shapes[count] = new MovingQuadPie(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
                 count++;
                 break;
             }
@@ -122,11 +130,13 @@ public class AnimationPanel extends JComponent implements Runnable {
 	 * @param w	the new width value
 	 */
 	public void setCurrentWidth(int w) {
-		currentWidth = w;
-		for (int i=0;i<count;i++)
-			if ( shapes[i].isSelected())
-				shapes[i].setWidth(currentWidth);
-	}
+        currentWidth = w;
+        for (int i = 0; i < count; i++)
+            if (shapes[i].isSelected()) {
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shapes[i].setHeight(currentWidth);
+                shapes[i].setWidth(currentWidth);
+            }
+    }
 
 	/** get the current height
 	 * @return currentHeight - the height value
@@ -138,11 +148,13 @@ public class AnimationPanel extends JComponent implements Runnable {
 	 * @param h	the new height value
 	 */
 	public void setCurrentHeight(int h) {
-		currentHeight = h;
-		for (int i=0;i<count;i++)
-			if ( shapes[i].isSelected())
-				shapes[i].setHeight(currentHeight);
-	}
+        currentHeight = h;
+        for (int i = 0; i < count; i++)
+            if (shapes[i].isSelected()) {
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shapes[i].setWidth(currentHeight);
+                shapes[i].setHeight(currentHeight);
+            }
+    }
 
 	/** get the current border colour
 	 * @return currentBorderColor - the border colour value
