@@ -145,7 +145,8 @@ public abstract class MovingShape {
                 break;
             }
             case 2 : {
-                path = new StraightLinePath((int) (Math.random() * 15));
+                path = new SquarePath();
+                break;
             }
         }
     }
@@ -247,15 +248,30 @@ public abstract class MovingShape {
      *  BouncingPath : A Bouncing path.
      *  ===============================================================================
      */
-    public class StraightLinePath extends MovingPath {
-        public StraightLinePath(int speed) {
-            deltaX = speed;
+    public class SquarePath extends MovingPath{
+        private int num = (int) (Math.random() * 30 + 10);
+        private int x0 = topLeft.x;
+        private int y0 = topLeft.y;
+        public SquarePath() {
+            deltaX = 5;
+            deltaY = 5;
         }
         public void move() {
+            if (topLeft.x < x0 + num && topLeft.y == y0) {
+                deltaX = 5;
+                deltaY = 0;
+            } else if (topLeft.x > x0 + num && topLeft.y < y0 + num) {
+                deltaX = 0;
+                deltaY = 5;
+            } else if ( topLeft.x > x0 && topLeft.y > y0 + num) {
+                deltaX = -5;
+                deltaY = 0;
+            } else if ( topLeft.x < x0 && topLeft.y > y0) {
+                deltaX = 0;
+                deltaY = -5;
+            }
             topLeft.x = topLeft.x + deltaX;
-
-            if (topLeft.x > marginWidth) topLeft.x = 0;
+            topLeft.y = topLeft.y + deltaY;
         }
-
     }
 }
