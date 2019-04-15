@@ -15,18 +15,18 @@ import java.awt.event.*;
 
 public class AnimationPanel extends JComponent implements Runnable {
     private Thread animationThread = null;    // the thread for animation
-    private MovingShape[] shapes;		// the array which stores a list of shapes
+    private ArrayList<MovingShape> shapes;		// the array which stores a list of shapes
     private int currentWidth=50, currentHeight=100, currentShapeType, currentPath; // the current shape type, // the current path type
     private Color currentBorderColor = Color.orange;  // the current border colour of a shape
     private Color currentFillColor = Color.blue;  // the current fill colour of a shape
     private int delay = 30;         // the current animation speed
     JPopupMenu popup;                // popup menu
-    private int count;
+//    private int count;
 
      /** Constructor of the AnimationPanel
         */
     public AnimationPanel() {
-		shapes = new MovingShape[5]; //create an array to store shapes
+		shapes = new ArrayList<MovingShape>(5); //create an array to store shapes
         Insets insets = getInsets();
         int marginWidth = getWidth() - insets.left - insets.right;
         int marginHeight = getHeight() - insets.top - insets.bottom;
@@ -49,9 +49,9 @@ public class AnimationPanel extends JComponent implements Runnable {
             public void mouseClicked( MouseEvent e ) {
                 if (animationThread != null) {  // if the animation has started, then
                 	boolean found = false;
-                    for (int i=0;i<count;i++)
-                    	if ( shapes[i].contains( e.getPoint()) ) { // if the mousepoint is within a shape, then set the shape to be selected/deselected
-                            shapes[i].setSelected( ! shapes[i].isSelected() );
+                    for (MovingShape shape : shapes)
+                    	if ( shape.contains( e.getPoint()) ) { // if the mousepoint is within a shape, then set the shape to be selected/deselected
+                            shape.setSelected( ! shape.isSelected() );
                             found = true;
 						}
 					if (!found) createNewShape(e.getX(), e.getY());
@@ -65,7 +65,7 @@ public class AnimationPanel extends JComponent implements Runnable {
      * @param y    the y-coordinate of the mouse position
      */
     protected void createNewShape(int x, int y) {
-		if (count>=4) return;
+		if (shapes.size()>=4) return;
         // get the margin of the frame
         Insets insets = getInsets();
         int marginWidth = getWidth() - insets.left - insets.right;
@@ -73,31 +73,26 @@ public class AnimationPanel extends JComponent implements Runnable {
         // create a new shape dependent on all current properties and the mouse position
         switch (currentShapeType) {
             case 0: { // Oval
-                shapes[count] = new MovingOval(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
-                count++;
+                shapes.add(new MovingOval(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
             case 1: { // Rectangle
-                shapes[count] = new MovingRectangle(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
-                count++;
+                shapes.add(new MovingRectangle(x, y, currentWidth, currentHeight, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
             case 2: { // Square
                 int min = Math.min(currentWidth, currentHeight);
-                shapes[count] = new MovingSquare(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
-                count++;
+                shapes.add(new MovingSquare(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
             case 3: { // Square pattern
                 int min = Math.min(currentWidth, currentHeight);
-                shapes[count] = new MovingSquarePattern(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
-                count++;
+                shapes.add(new MovingSquarePattern(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
             case 4: { // Quad Pie
                 int min = Math.min(currentWidth, currentHeight);
-                shapes[count] = new MovingQuadPie(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath);
-                count++;
+                shapes.add(new MovingQuadPie(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
        }
@@ -115,9 +110,9 @@ public class AnimationPanel extends JComponent implements Runnable {
      */
     public void setCurrentPathType(int index) {
         currentPath = index;
- 		for (int i=0;i<count;i++)
-			if ( shapes[i].isSelected())
-				shapes[i].setPath(index);
+ 		for (MovingShape shape : shapes)
+			if ( shape.isSelected())
+				shape.setPath(index);
     }
 
 	/** get the current width
@@ -131,10 +126,10 @@ public class AnimationPanel extends JComponent implements Runnable {
 	 */
 	public void setCurrentWidth(int w) {
         currentWidth = w;
-        for (int i = 0; i < count; i++)
-            if (shapes[i].isSelected()) {
-                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shapes[i].setHeight(currentWidth);
-                shapes[i].setWidth(currentWidth);
+        for (MovingShape shape : shapes)
+            if (shape.isSelected()) {
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shape.setHeight(currentWidth);
+                shape.setWidth(currentWidth);
             }
     }
 
@@ -149,10 +144,10 @@ public class AnimationPanel extends JComponent implements Runnable {
 	 */
 	public void setCurrentHeight(int h) {
         currentHeight = h;
-        for (int i = 0; i < count; i++)
-            if (shapes[i].isSelected()) {
-                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shapes[i].setWidth(currentHeight);
-                shapes[i].setHeight(currentHeight);
+        for (MovingShape shape : shapes)
+            if (shape.isSelected()) {
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shape.setWidth(currentHeight);
+                shape.setHeight(currentHeight);
             }
     }
 
@@ -167,9 +162,9 @@ public class AnimationPanel extends JComponent implements Runnable {
 	 */
 	public void setCurrentBorderColor(Color bc) {
 		currentBorderColor = bc;
-		for (int i=0;i<count;i++)
-			if ( shapes[i].isSelected())
-				shapes[i].setBorderColor(currentBorderColor);
+		for (MovingShape shape : shapes)
+			if ( shape.isSelected())
+				shape.setBorderColor(currentBorderColor);
 	}
 
 	/** get the current fill colour
@@ -179,14 +174,14 @@ public class AnimationPanel extends JComponent implements Runnable {
 		return currentFillColor;
 	}
 	/** set the current fill colour and the border colour for all currently selected shapes
-     * @param bc    the new fill colour value
+     * @param fc    the new fill colour value
      */
     public void setCurrentFillColor(Color fc) {
         currentFillColor = fc;
         //complete this
-		for (int i=0;i<count;i++)
-			if ( shapes[i].isSelected())
-				shapes[i].setFillColor(currentFillColor);
+		for (MovingShape shape : shapes)
+			if ( shape.isSelected())
+				shape.setFillColor(currentFillColor);
     }
 
    /** reset the margin size of all shapes
@@ -195,14 +190,14 @@ public class AnimationPanel extends JComponent implements Runnable {
         Insets insets = getInsets();
         int marginWidth = getWidth() - insets.left - insets.right;
         int marginHeight = getHeight() - insets.top - insets.bottom ;
-        for (int i=0;i<count;i++)
-			shapes[i].setMarginSize(marginWidth,marginHeight );
+        for (MovingShape shape : shapes)
+			shape.setMarginSize(marginWidth,marginHeight);
     }
 
 	/** remove all shapes
      */
     public void clearAllShapes() {
-        count=0;
+        shapes.clear();
     }
 
     /**    update the painting area
@@ -216,9 +211,9 @@ public class AnimationPanel extends JComponent implements Runnable {
      * @param g    the Graphics control
      */
     public void paintComponent(Graphics g) {
-        for (int i=0;i<count;i++) {
-            shapes[i].move();
-		    shapes[i].draw(g);
+        for (MovingShape shape : shapes) {
+            shape.move();
+		    shape.draw(g);
 		}
     }
     // you don't need to make any changes after this line ______________
