@@ -88,7 +88,7 @@ public abstract class MovingShape {
     public void setBorderColor(Color c) { borderColor = c; }
 
     /** Set the border colour of the shape.
-     * @param c     the border colour
+     * @param fc     the border colour
      */
     public void setFillColor(Color fc) { fillColor = fc; }
     /**
