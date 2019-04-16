@@ -7,4 +7,4 @@ we haven't been taught, but this assignment is relatively easy if you spend enou
 especially the GUI part and be clear what you need to achieve the goal. The slide about this assignment is really helpful
 However creating my own shape and path requires some creativity which cost me an hour to figure out a shape which is not
 "boring". So I came up with a classic PacMan and I really like it. I were also trying to add some pac man background music
-from the original game but I failed every time I tried, so i game uo on the music. But it was still genuinely interesting. 
+from the original game but I failed every time I tried, so i game uo on the music. But it was still genuinely interesting.
