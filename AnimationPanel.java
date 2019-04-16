@@ -95,6 +95,11 @@ public class AnimationPanel extends JComponent implements Runnable {
                 shapes.add(new MovingQuadPie(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
                 break;
             }
+            case 5: {  // Pacman
+                int min = Math.min(currentWidth, currentHeight);
+                shapes.add(new MovingPacman(x, y, min, min, marginWidth, marginHeight, currentBorderColor, currentFillColor, currentPath));
+                break;
+            }
        }
     }
 
@@ -128,7 +133,7 @@ public class AnimationPanel extends JComponent implements Runnable {
         currentWidth = w;
         for (MovingShape shape : shapes)
             if (shape.isSelected()) {
-                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shape.setHeight(currentWidth);
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4 || currentShapeType == 5) shape.setHeight(currentWidth);
                 shape.setWidth(currentWidth);
             }
     }
@@ -146,7 +151,7 @@ public class AnimationPanel extends JComponent implements Runnable {
         currentHeight = h;
         for (MovingShape shape : shapes)
             if (shape.isSelected()) {
-                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4) shape.setWidth(currentHeight);
+                if (currentShapeType == 2 || currentShapeType == 3 || currentShapeType == 4 || currentShapeType == 5) shape.setWidth(currentHeight);
                 shape.setHeight(currentHeight);
             }
     }

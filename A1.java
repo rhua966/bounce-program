@@ -62,11 +62,12 @@ public class A1 extends JFrame {
         ImageIcon squareButtonIcon = createImageIcon("square.gif");
         ImageIcon spatternButtonIcon = createImageIcon("spattern.gif");
         ImageIcon pieButtonIcon = createImageIcon("pie.gif");
-        shapesComboBox = new JComboBox<ImageIcon>(new ImageIcon[] {ovalButtonIcon,recangletButtonIcon,squareButtonIcon,spatternButtonIcon, pieButtonIcon } );
+        ImageIcon pacmanButtonIcon = createImageIcon("pacman.gif");
+        shapesComboBox = new JComboBox<ImageIcon>(new ImageIcon[] {ovalButtonIcon,recangletButtonIcon,squareButtonIcon,spatternButtonIcon, pieButtonIcon, pacmanButtonIcon } );
         shapesComboBox.setToolTipText("Set shape");
         shapesComboBox.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //set the Current shape type based on the selection: 0 for Rectangle, 1 for oval, 2 for checker, 3 for gradient, 4 for pattern
+                //set the Current shape type based on the selection: 0 for Rectangle, 1 for oval, 2 for checker, 3 for gradient, 4 for pattern, 5 for pacman
                 panel.setCurrentShapeType(shapesComboBox.getSelectedIndex());
             }
         });
